@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>专属定制</title>
+</head>
+<body>
+<form name="trip_info" action = '/show_trip' method="post">
+<p>出行日期：<input type="date" name= "daystart"></p>
+
+<p class="total-day control-group">旅行天数<span class="cell-wrap-select">
+
+<select name="days_trip" >
+<option value=1>请选择</option>
+<option value=1>1</option>
+<option value=2>2</option>
+<option value=3>3</option>
+<option value=4>4</option>
+<option value=5>5</option>
+<option value=6>6</option>
+<option value=7>7</option>
+<option value=8>8</option>
+<option value=9>9</option>
+<option value=10>10</option>
+<option value=11>11</option>
+<option value=12>12</option>
+<option value=13>13</option>
+<option value=14>14</option>
+<option value=15>15</option>
+<option value=16>16</option>
+<option value=17>17</option>
+<option value=18>18</option>
+<option value=19>19</option>
+<option value=20>20</option>
+<option value=21>21</option>
+<option value=22>22</option>
+<option value=23>23</option>
+<option value=24>24</option>
+<option value=25>25</option>
+<option value=26>26</option>
+<option value=27>27</option>
+<option value=28>28</option>
+<option value=29>29</option>
+<option value=30>30</option>
+
+</select>
+
+
+<p>旅行人数<span>
+
+<select name="num_person" >
+<option value=2>请选择</option>
+<option value=1>1</option>
+<option value=2>2</option>
+<option value=3>3</option>
+<option value=4>4</option>
+<option value=5>5</option>
+<option value=6>6</option>
+<option value=7>7</option>
+<option value=8>8</option>
+<option value=9>9人及以上</option>
+
+</select>
+
+<p>成人<span class="cell-wrap-select">
+
+<select name="adult" >
+<option value=2>请选择</option>
+<option value=1>1</option>
+<option value=2>2</option>
+<option value=3>3</option>
+<option value=4>4</option>
+<option value=5>5</option>
+<option value=6>6</option>
+<option value=7>7</option>
+<option value=8>8</option>
+
+</select>
+
+<p class="destinations">选择你的出行目的地：</p>
+
+<select name="destinations" >
+<option value="paris">请选择</option>
+<option value='paris'>巴黎</option>
+<option value="provence">普罗旺斯</option>
+<option value="bordeau">波尔多</option>
+<option value="tour">图尔</option>
+<option value="paybas">荷兰</option>
+<option value="france_around">法国周边</option>
+</select>
+
+<div class="cultural">
+<p >选择你喜欢的类型 </p>
+<input type="checkbox" name="cultural1" value="village"/>
+  小镇
+<input type="checkbox" name="cultural1" value="ville"/>
+  城市
+<input type="checkbox" name="cultural1" value="culture" />
+  文化
+<input type="checkbox" name="cultural1"  value="sea"/>
+  山水风光
+</div>
+
+
+
+<div>
+<p><i ></i> 补充说明你的需求</p>
+<TEXTAREA name="need" rows=5 COLS=40>你需要的具体要求</TEXTAREA> <P>
+</div>
+<input type="submit" value="提交" />
+</form>
+
+
+</body>
+</html>    
