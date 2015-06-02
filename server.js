@@ -16,7 +16,7 @@ router
 
 function index() {
   return  function* (next) {
-    content = {title: 'home page'}
+    content = {title: '行程定制'}
     this.body  = yield render('book', content)
   }
 }
@@ -27,7 +27,7 @@ function show_trip() {
       var body = yield parse(this, {limit: '1kb'} )
       content = {
         advices : advice(body),
-        title : "Our advice",
+        title : "路线推荐",
       }
      this.body = yield render('show_trip', content)
    }
@@ -35,7 +35,7 @@ function show_trip() {
 
 function destination() {
   return function* (next) {
-    content = {title: 'destination page'}
+    content = {title: '行程咨询表单'}
     this.body  = yield render('destination', content)
   }
 }
@@ -45,7 +45,7 @@ app
   .use(router.routes())
   .use(function *notFound(next) {
     if (this.status == 404) {
-      content = {title : 'Page not found'}
+      content = {title : '页面不存在'}
       this.body = yield render('no_found', content)
     } else {
       yield next
@@ -63,14 +63,26 @@ app.use(function* no_found(next) {
 
 //============all the functions===========
 function advice(trip_info) {
-  if (trip_info.days_trip > 25) {
-    return {
+  response = {
       num_lines : 0,
-      urls : {
-        'first': 'http://europely.com/reservation/'
-      },
-    }
+      urls : [],
   }
+  switch(trip_info.days_trip) {
+    case '1': response.num_lines = 1
+      response.urls.push('http://europely.com/package/grand-canyon-valensole-holy-cross-lake-course/')
+      break
+    case '2': response.num_lines = 2
+      response.urls.push('http://europely.com/package/lavender-canyoning-tour-route-2/')
+      response.urls.push('http://europely.com/package/lavender-canyon-depth-tour-route-2/')
+      break
+    default:
+      response.num_lines = 0
+      response.urls.push('http://europely.com/')
+     break
+  }
+  return response
+ }
+  /*
   if (trip_info.days_trip > 10) {
     if (trip_info.destinations == 'france_around') {
      return {
@@ -88,5 +100,5 @@ function advice(trip_info) {
       },
     }
 }
-
+*/
 app.listen(3000)

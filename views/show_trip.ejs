@@ -1,6 +1,11 @@
 <% include header.ejs %>
 <h1><%= title %></h1>
 <p>we have <%=advices.num_lines%> advices <br />
-  <li><a href=<%= advices.urls.first%>>line</a></li></p>
+<% i = 0 %>
+<% advices.urls.forEach(function(url) { %>
+  <% i=i+1%>
+  <li><a href=<%= url%>>line <%= i %></a></li>
+  <% }) %>
+ </p>
 <% include footer.ejs %>
 
