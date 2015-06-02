@@ -1,34 +1,67 @@
 var koa = require('koa')
 var views = require('co-views')
-var parse = require('co-body');
+var parse = require('co-body')
+var router = require('koa-router')();
 var app = koa()
 
 var render = views(__dirname +  '/views', {
   ext: 'ejs'
 })
 
-app.use(function* index(next) {
-  if(this.request.path !== '/') return yield next
-  content = {title: 'home page'}
-  this.body  = yield render('index')
-})
+//===========router setting==============
+router
+  .get('/', index())
+  .post('/show_trip', show_trip())
+  .get('/destination', destination())
 
-app.use(function* show_trip(next){
-  if(this.request.path !== '/show_trip') return yield next
-  if(this.method !== 'POST') return yield next
-  var body = yield parse(this, {limit: '1kb'} )
-  content = {
-    advices : advice(body),
-    title : "Our advice",
+function index() {
+  return  function* (next) {
+    content = {title: 'home page'}
+    this.body  = yield render('book', content)
+  }
 }
-  this.body = yield render('show_trip', content)
-})
+
+function show_trip() {
+  return function* (next) {
+    if(this.method !== 'POST') return yield next
+      var body = yield parse(this, {limit: '1kb'} )
+      content = {
+        advices : advice(body),
+        title : "Our advice",
+      }
+     this.body = yield render('show_trip', content)
+   }
+}
+
+function destination() {
+  return function* (next) {
+    content = {title: 'destination page'}
+    this.body  = yield render('destination', content)
+  }
+}
+
+//========app setting===============
+app
+  .use(router.routes())
+  .use(function *notFound(next) {
+    if (this.status == 404) {
+      content = {title : 'Page not found'}
+      this.body = yield render('no_found', content)
+    } else {
+      yield next
+    }
+  })
+/*
+app.use()
+
+app.use()
 
 app.use(function* no_found(next) {
- content = {title : 'Page not found'}
- this.body = yield render('no_found', content)
+ 
 })
+*/
 
+//============all the functions===========
 function advice(trip_info) {
   if (trip_info.days_trip > 25) {
     return {
