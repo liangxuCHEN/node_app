@@ -1,0 +1,24 @@
+<% include book_header.ejs %>
+<div class="container">
+<div class="page-header">
+ <% if (advices.num_lines > 0) { %>
+  <h4> <%=advices.num_lines%>个参考行程</h4>
+</div>
+<div class="jumbotron">
+ <% i = 0 %>
+<ul class="list-group">
+ <% advices.urls.forEach(function(url) { %>
+  <% i=i+1%>
+    <li class="list-group-item"><span class="badge">
+      <%= advices.price[i-1]%></span><span class="label label-danger">行程<%= i %></span>
+      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> <%=advices.day[i-1]%> days | active : <%= advices.actived[i-1]%>  
+      <a href=<%= '/lines/' + advices.line_id[i-1]%>>edit</a> </li>
+
+  <% }) %>
+ </ul>
+</div>
+ <%} %>
+
+</div>
+<% include book_footer.ejs %>
+

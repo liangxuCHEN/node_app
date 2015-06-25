@@ -1,0 +1,42 @@
+<% include header.ejs %>
+<div class="container">
+ <form class="form-horizontal" action = '/login' method="post" class="form-horizontal">
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">login</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">username</label>
+          <div class="controls">
+            <input type="text" placeholder="admin" class="input-xlarge" name="username">
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+    
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">password</label>
+          <div class="controls">
+            <input type="password" placeholder="" class="input-xlarge" name="password">
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+   <div class="control-group">
+
+        <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">提交</button>
+          </div>
+         </div>
+
+    </fieldset>
+  </form>
+
+</div>
+<% include footer.ejs %>

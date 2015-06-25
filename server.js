@@ -3,12 +3,17 @@
 var koa = require('koa')
 var views = require('co-views')
 var parse = require('co-body')
+var session = require('koa-session')
 
 global.app = koa()
 
 //数据库配置
 var co = require('co')
 var mysql = require('mysql-co');
+
+//----------sesion--------------
+app.keys = ['chenliangxu']
+app.use(session(app))
 
 
 //====================db===============

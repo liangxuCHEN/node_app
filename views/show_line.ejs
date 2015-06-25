@@ -1,36 +1,24 @@
 <% include header.ejs %>
 <div class="container">
-<form name="add_line" action = '/addLine' method="post" class="form-horizontal">
+<form name="update_line" action = <%= '/lines/' + line_id%> method="post" class="form-horizontal">
 <fieldset>
       <div id="legend" class="">
         <legend class="">addline</legend>
       </div>
-    <div class="control-group">
-
-          <!-- Text input-->
-          <label class="control-label" for="input01">code</label>
-          <div class="controls">
-            <input type="text" placeholder="AB111" class="input-xlarge" name="code">
-            <p class="help-block">线路编号</p>
-          </div>
-        </div>
-
+    
     <div class="control-group">
 
           <!-- Text input-->
           <label class="control-label" for="input01">name_cn</label>
           <div class="controls">
-            <input type="text" placeholder="一日游" class="input-xlarge" name="name_cn">
+            <input name="line_id" value=<%=line_id%> type="hidden">
+            <input type="text" placeholder="一日游" class="input-xlarge" name="name_cn" value=<%=name_cn%>>
             <p class="help-block">路线名称</p>
           </div>
-        </div>
 
-<div class="control-group">
-
-          <!-- Text input-->
-          <label class="control-label" for="input01">price</label>
+           <label class="control-label" for="input01">destination</label>
           <div class="controls">
-            <input type="text" placeholder="700" class="input-xlarge" name="price" >
+            <input type="text" name="destination" value=<%=destination%>>
           </div>
         </div>
 
@@ -39,11 +27,22 @@
           <!-- Text input-->
           <label class="control-label" for="input01">URL</label>
           <div class="controls">
-            <input type="text" placeholder="http://europely.com" class="input-xlarge" name="site">
+            <input type="text" placeholder="http://europely.com" class="input-xlarge" name="site" value=<%=url_line%>>
             <p class="help-block">网址</p>
           </div>
-        </div><div class="control-group">
-          <label class="control-label">天数</label>
+        </div>
+
+<div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">price</label>
+          <div class="controls">
+            <input type="text" placeholder="700" class="input-xlarge" name="price" value=<%=price%>>
+          </div>
+        </div>
+
+  <div class="control-group">
+          <label class="control-label">天数: <%=day%></label>
 
           <!-- Multiple Checkboxes -->
           <div class="controls">
@@ -97,16 +96,16 @@
 </div>
 
 <div class="control-group">
-          <label class="control-label">Active</label>
+          <label class="control-label">Active  <%=actived%></label>
           <div class="controls">
 
             <!-- Multiple Radios -->
             <label class="radio">
-              <input type="radio" value="active" name="is_actived" checked="checked">
+              <input type="radio" value="1" name="active" checked="checked">
               Yes
             </label>
             <label class="radio">
-              <input type="radio" value="no_active" name="is_actived">
+              <input type="radio" value="0" name="active">
               No
             </label>
           </div>
@@ -125,3 +124,4 @@
 </form>
 </div>
 <% include footer.ejs %>
+
