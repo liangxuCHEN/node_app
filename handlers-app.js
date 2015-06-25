@@ -26,6 +26,8 @@ exports.destination = function *() {
     this.body  = yield render('destination', content)
   }
 
+
+
 //=============function====================
 //============all the functions===========
 function advice(trip_info) {

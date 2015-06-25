@@ -12,7 +12,6 @@ var mysql = require('mysql-co');
 
 
 //====================db===============
-console.log('create db')
 // MySQL connection pool TODO: how to catch connection exception eg invalid password?
 let config = require('./config/db-development.json')
 GLOBAL.connectionPool = mysql.createPool(config.db); // put in GLOBAL to pass to sub-apps

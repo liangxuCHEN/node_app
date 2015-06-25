@@ -3,14 +3,16 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 'use strict'
 var router = require('koa-router')()
-var service = require('../models/user_service.js') 
+var service = require('../models/line_service.js') 
 var app_handler = require('../handlers-app.js')
 
 //===========router setting==============
 router
   .get('/', app_handler.get_index)
-  .get('/users', service.users.findAll)
-  .get('/users/:id', service.users.findByPK)
+  .get('/lines', service.lines.findAll)
+  .get('/lines/:id', service.lines.findByPK)
+  .get('/addLine', service.lines.addLine)
+  .post('/addLine', service.lines.addLine)
   .post('/show_trip', app_handler.show_trip)
   .get('/destination', app_handler.destination)
 

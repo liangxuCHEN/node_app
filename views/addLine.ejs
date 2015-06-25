@@ -1,0 +1,72 @@
+<% include header.ejs %>
+<div class="container">
+<form name="add_line" action = '/addLine' method="post" class="form-horizontal">
+<fieldset>
+      <div id="legend" class="">
+        <legend class="">addline</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">code</label>
+          <div class="controls">
+            <input type="text" placeholder="AB111" class="input-xlarge" name="code">
+            <p class="help-block">线路编号</p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">name_cn</label>
+          <div class="controls">
+            <input type="text" placeholder="一日游" class="input-xlarge" name="name_cn">
+            <p class="help-block">路线名称</p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">URL</label>
+          <div class="controls">
+            <input type="text" placeholder="http://europely.com" class="input-xlarge" name="site">
+            <p class="help-block">网址</p>
+          </div>
+        </div><div class="control-group">
+          <label class="control-label">天数</label>
+
+          <!-- Multiple Checkboxes -->
+          <div class="controls">
+      <!-- Inline Checkboxes -->
+      <label class="checkbox inline">
+        <input type="checkbox" value="1" name="day">
+        1
+      </label>
+      <label class="checkbox inline">
+        <input type="checkbox" value="2" name="day">
+        2
+      </label>
+      <label class="checkbox inline">
+        <input type="checkbox" value="3" name="day">
+        3
+      </label>
+  </div>
+
+        </div>
+
+    
+
+    <div class="control-group">
+          <label class="control-label">Button</label>
+
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">Button</button>
+          </div>
+        </div>
+
+    </fieldset>
+</form>
+</div>
+<% include footer.ejs %>
