@@ -40,6 +40,57 @@
         <li class="list-group-item">邮件 reservation@europely.com </li>
         <li class="list-group-item"><a href="/destination"><button class="btn btn-info">重新填写表格</button></a></li>
         <li class="list-group-item"><a href="http://europely.com/" target="_blank"><button class="btn btn-success">网站首页</button></a></li>
+        <li class="list-group-item">
+          <form class="form-horizontal" action="/addComment" method="post" name="comment_info">
+             <fieldset>
+               <div id="legend" class="">
+                 <legend class="">请给我们留言，48小时内回复</legend>
+               </div>
+             <div class="control-group">
+
+                   <!-- Text input-->
+                   <label class="control-label" for="input01">邮箱</label>
+                   <div class="controls">
+                     <input type="email" placeholder="example@email.com" class="input-xlarge" name="email">
+                     <p class="help-block"></p>
+                   </div>
+                 </div>
+
+             <div class="control-group">
+
+                   <!-- Text input-->
+                   <label class="control-label" for="input01">手机</label>
+                   <div class="controls">
+                     <input type="text" placeholder="" class="input-xlarge" name="phone"  required="required">
+                     <p class="help-block"></p>
+                   </div>
+                 </div>
+
+             <div class="control-group">
+
+                   <!-- Textarea -->
+                   <label class="control-label">留言</label>
+                   <div class="controls">
+                     <div class="textarea">
+                           <textarea name="comment_text"><%=need%> </textarea>
+                     </div>
+                   </div>
+                 </div>
+
+             <div class="control-group">
+                   <label class="control-label"></label>
+
+                   <!-- Button -->
+                   <div class="controls">
+                     <button class="btn btn-primary">提交</button>
+                   </div>
+                 </div>
+
+             </fieldset>
+           </form>
+
+
+        </li>
        </ul>
       </div>
      </div>

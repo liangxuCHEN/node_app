@@ -24,10 +24,10 @@ exports.lines = {
           response = add_line(line, response)
         })
       }
-      console.log(response)
+      //console.log(response)
       let content = {
         advices : response,
-        title : "All lines",
+        title : "全部线路",
       }
       this.body = yield render('show_all_lines', content)
     } else {
@@ -41,7 +41,7 @@ exports.lines = {
      //update the line
         if(this.method == 'POST') {
          let values = yield parse(this, {limit: '1kb'} )
-         console.log(values)
+         //console.log(values)
          try {
             yield GLOBAL.db.query('Update line_euro Set ? Where line_id = ?', [values, values.line_id])
             this.redirect('/lines')
@@ -62,7 +62,7 @@ exports.lines = {
 
       if(this.method == 'GET') {
          let rows = yield GLOBAL.db.query('select * from line_euro where line_id=?', this.params.id)
-         console.log(rows)
+         //console.log(rows)
          if(rows[0].length==0){
             //抛出异常，并返回http status 404
             console.log('no found')
@@ -76,7 +76,7 @@ exports.lines = {
                price: rows[0][0].price,
                actived: rows[0][0].active,
                destination: rows[0][0].destination,
-               title : "edit line",
+               title : "线路编辑",
              }
              this.body = yield render('show_line', content)
           }
@@ -91,10 +91,10 @@ exports.lines = {
     if (this.session.authenticated) {
        if(this.method == 'POST') {
          let values = yield parse(this, {limit: '1kb'} )
-         console.log(values) 
+         //console.log(values) 
          try {
                let result = yield GLOBAL.db.query('Insert Into line_euro Set ?', values);
-               console.log('line', result.insertId, new Date); // 
+               //console.log('line', result.insertId, new Date); // 
                this.body = result[0].insertId;
           } catch (e) {
                switch (e.code) {
@@ -163,14 +163,21 @@ exports.lines = {
           }
          break
        case '2': 
-         response = middle_trip_advice(1, 6, response) 
+         var rows = yield GLOBAL.db.query('select * from line_euro where day>? and day<?', [1, 6])
+         if(rows[0].length !== 0) {
+           response = find_line_by_destination(body.destination, rows[0], response)
+          }
          break
        default:
-          response = long_trip_advice(5, 100, response) 
+          var rows = yield GLOBAL.db.query('select * from line_euro where day>6 ')
+         if(rows[0].length !== 0) {
+           response = find_line_by_destination(body.destination, rows[0], response)
+          } 
         break
      }
       let content = {
         advices : response,
+        need : body.need,
         title : "路线推荐",
       }
      this.body = yield render('show_trip', content)
@@ -178,11 +185,13 @@ exports.lines = {
 };
 
 function find_line_by_destination(destinations, lines, response) {
+  //console.log(destinations)
   lines.forEach(function(line) {
     
     destinations.forEach(function (destination) {
-      console.log(destination)
-      if(line.destination == destination) { 
+      //console.log(destination)
+      if(line.destination.search(destination) >= 0) { 
+        //console.log('add line')
         response.num_lines +=1
         response = add_line(line, response)
       }

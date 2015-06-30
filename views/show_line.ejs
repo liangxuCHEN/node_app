@@ -3,29 +3,30 @@
 <form name="update_line" action = <%= '/lines/' + line_id%> method="post" class="form-horizontal">
 <fieldset>
       <div id="legend" class="">
-        <legend class="">addline</legend>
+        <legend class="">更新线路</legend>
       </div>
     
     <div class="control-group">
 
           <!-- Text input-->
-          <label class="control-label" for="input01">name_cn</label>
+          <label class="control-label" for="input01">路线名称</label>
           <div class="controls">
             <input name="line_id" value=<%=line_id%> type="hidden">
             <input type="text" placeholder="一日游" class="input-xlarge" name="name_cn" value=<%=name_cn%>>
             <p class="help-block">路线名称</p>
           </div>
 
-           <label class="control-label" for="input01">destination</label>
+           <label class="control-label" for="input01">目的地</label>
           <div class="controls">
             <input type="text" name="destination" value=<%=destination%>>
+             <p class="help-block">可以填写多个，用逗号隔开,provence paris Prague  nice tour paybas italy germany switzerland czech</p>
           </div>
         </div>
 
     <div class="control-group">
 
           <!-- Text input-->
-          <label class="control-label" for="input01">URL</label>
+          <label class="control-label" for="input01">网址</label>
           <div class="controls">
             <input type="text" placeholder="http://europely.com" class="input-xlarge" name="site" value=<%=url_line%>>
             <p class="help-block">网址</p>
@@ -35,7 +36,7 @@
 <div class="control-group">
 
           <!-- Text input-->
-          <label class="control-label" for="input01">price</label>
+          <label class="control-label" for="input01">价钱</label>
           <div class="controls">
             <input type="text" placeholder="700" class="input-xlarge" name="price" value=<%=price%>>
           </div>
@@ -96,22 +97,32 @@
 </div>
 
 <div class="control-group">
-          <label class="control-label">Active  <%=actived%></label>
+          <label class="control-label">可用否 </label>
           <div class="controls">
-
-            <!-- Multiple Radios -->
-            <label class="radio">
-              <input type="radio" value="1" name="active" checked="checked">
-              Yes
-            </label>
-            <label class="radio">
-              <input type="radio" value="0" name="active">
-              No
-            </label>
+              <%if (actived) {%>
+               <!-- Multiple Radios -->
+                <label class="radio">
+                  <input type="radio" value="1" name="active" checked="checked">
+                    可用
+                  </label>
+                  <label class="radio">
+                    <input type="radio" value="0" name="active">
+                    不可用
+                  </label>
+             
+             <% } else {%>
+                <!-- Multiple Radios -->
+                 <label class="radio">
+                   <input type="radio" value="1" name="active" >
+                     可用
+                   </label>
+                   <label class="radio">
+                     <input type="radio" value="0" name="active" checked="checked">
+                     不可用
+                   </label>             
+             <% }%>
           </div>
-
-        </div>
-
+ </div>
 
     <div class="control-group">
           <!-- Button -->

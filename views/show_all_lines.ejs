@@ -1,5 +1,9 @@
 <% include book_header.ejs %>
 <div class="container">
+<ol class="breadcrumb">
+  <li><a href="/admin">首页</a></li>
+  <li><a class="active">路线</a></li>
+</ol>
 <div class="page-header">
  <% if (advices.num_lines > 0) { %>
   <h4> <%=advices.num_lines%>个参考行程</h4>
@@ -11,8 +15,13 @@
   <% i=i+1%>
     <li class="list-group-item"><span class="badge">
       <%= advices.price[i-1]%></span><span class="label label-danger">行程<%= i %></span>
-      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> <%=advices.day[i-1]%> days | active : <%= advices.actived[i-1]%>  
-      <a href=<%= '/lines/' + advices.line_id[i-1]%>>edit</a> </li>
+      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> <%=advices.day[i-1]%>天|
+      <%if (advices.actived[i-1]) {%>
+        <span class="label label-success">有用</span>
+      <% } else {%>
+        <span class="label label-warning">无用</span>
+      <% }%>
+      <a href=<%= '/lines/' + advices.line_id[i-1]%>>编辑</a> </li>
 
   <% }) %>
  </ul>

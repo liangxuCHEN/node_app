@@ -26,6 +26,10 @@ exports.destination = function *() {
     this.body  = yield render('destination', content)
   }
 
+exports.admin_page = function *() {
+    let content = {title: 'admin'}
+    this.body  = yield render('admin', content)
+  }
 
 
 //=============function====================
