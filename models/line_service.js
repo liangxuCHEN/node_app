@@ -65,7 +65,7 @@ exports.lines = {
          //console.log(rows)
          if(rows[0].length==0){
             //抛出异常，并返回http status 404
-            console.log('no found')
+            //console.log('no found')
             return this.throw(this.params.id + '数据未找到', 404);
           } else {
              let content = {

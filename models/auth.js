@@ -14,7 +14,7 @@ exports.auth = {
     if (body.username !== 'chenliangxu'
       || body.password !== '123') return this.status = 400
     this.session.authenticated = true
-    console.log(this.session.authenticated) 
+    //console.log(this.session.authenticated) 
     this.redirect('/lines')
   },
  }
