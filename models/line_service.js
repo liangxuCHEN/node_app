@@ -95,7 +95,7 @@ exports.lines = {
          try {
                let result = yield GLOBAL.db.query('Insert Into line_euro Set ?', values);
                //console.log('line', result.insertId, new Date); // 
-               this.body = result[0].insertId;
+               this.redirect('/lines')
           } catch (e) {
                switch (e.code) {
                    case 'ER_BAD_NULL_ERROR':

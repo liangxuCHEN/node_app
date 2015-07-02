@@ -1,9 +1,9 @@
 {
     "db": {
-        "host":     "localhost",
+        "host":     "172.17.0.33",
         "port":     "3306",
         "database": "gameApp",
         "user":     "root",
-        "password": "d338ca93"
+        "password": "123456"
     }
 }

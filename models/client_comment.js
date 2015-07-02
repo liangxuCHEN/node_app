@@ -101,7 +101,7 @@ exports.comments = {
       let values = yield parse(this, {limit: '1kb'})
       values.is_check = 0
       values.created_at = new Date().toDateString()
-      console.log(values)
+      //console.log(values)
       try {
         let result = yield GLOBAL.db.query('Insert Into client_comment Set ?', values)
         let content = {
