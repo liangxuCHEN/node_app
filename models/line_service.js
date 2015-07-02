@@ -187,15 +187,16 @@ exports.lines = {
 function find_line_by_destination(destinations, lines, response) {
   //console.log(destinations)
   lines.forEach(function(line) {
-    
-    destinations.forEach(function (destination) {
-      //console.log(destination)
-      if(line.destination.search(destination) >= 0) { 
+    let flag = false 
+    for (var i = destinations.length - 1; i >= 0; i--) {
+      if(line.destination.search(destinations[i]) >= 0) { 
         //console.log('add line')
         response.num_lines +=1
         response = add_line(line, response)
+        flag = true
       }
-    })
+      if (flag) break
+    }
   })
   return response
 }
