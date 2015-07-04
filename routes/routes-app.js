@@ -7,6 +7,7 @@ var service = require('../models/line_service.js')
 var service_comment = require('../models/client_comment.js')
 var authService = require('../models/auth.js')  
 var app_handler = require('../handlers-app.js')
+var contact_service = require('../models/contact.js')
 
 //===========router setting==============
 router
@@ -25,5 +26,7 @@ router
   .get('/comments', service_comment.comments.findAll)
   .get('/notCheckComments', service_comment.comments.findAllNotCheck)
   .get('/admin', app_handler.admin_page)
-
+  .get('/pdf', contact_service.contact.generatorPDF)
+  .get('/allContacts', contact_service.contact.readAllFile)
+  .get('/contactPDF/:file_name', contact_service.contact.downFile)
 global.app.use(router.routes())
