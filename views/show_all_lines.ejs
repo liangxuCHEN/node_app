@@ -15,14 +15,14 @@
   <% i=i+1%>
     <li class="list-group-item"><span class="badge">
       <%= advices.price[i-1]%></span><span class="label label-danger">行程<%= i %></span>
-      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> <%=advices.day[i-1]%>天|
+      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> 
+       <span class="label label-info"><%=advices.day[i-1]%>天</span>
       <%if (advices.actived[i-1]) {%>
         <span class="label label-success">有用</span>
       <% } else {%>
         <span class="label label-warning">无用</span>
       <% }%>
-      <a href=<%= '/lines/' + advices.line_id[i-1]%>>编辑</a> </li>
-
+      <%if (power == 0) {%> <a href=<%= '/lines/' + advices.line_id[i-1]%>>编辑</a> </li> <% }%>
   <% }) %>
  </ul>
 </div>

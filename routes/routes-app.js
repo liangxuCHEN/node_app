@@ -21,6 +21,8 @@ router
   .get('/destination', app_handler.destination)
   .get('/login', authService.auth.login)
   .post('/login', authService.auth.login)
+  .get('/addUser', authService.auth.addUser)
+  .post('/addUser', authService.auth.addUser)
   .get('/comment/:id', service_comment.comments.checkComment)
   .post('/addComment', service_comment.comments.addComment)
   .get('/comments', service_comment.comments.findAll)

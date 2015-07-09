@@ -27,8 +27,19 @@ exports.destination = function *() {
   }
 
 exports.admin_page = function *() {
-    let content = {title: 'admin'}
-    this.body  = yield render('admin', content)
+    if (this.session.authenticated) {
+      let content = {
+        title: 'admin',
+        power: this.session.power,
+      }
+      this.body  = yield render('admin', content)
+    } else {
+      let content = {
+          title: '登录系统',
+          error_info: 'no',
+       }
+       this.body = yield render('/login', content)
+    }
   }
 
 

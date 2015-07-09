@@ -1,13 +1,13 @@
 <% include header.ejs %>
 <div class="container">
- <form class="form-horizontal" action = '/login' method="post" class="form-horizontal">
+ <form class="form-horizontal" action = '/addUser' method="post" class="form-horizontal">
     <fieldset>
       <div id="legend" class="">
-        <legend class="">登录系统</legend>
+        <legend class="">添加用户</legend>
       </div>
-      <%if ( error_info !== 'no') {%>
+      <%if ( info !== 'no') {%>
         <div class="alert alert-danger" role="alert">
-        <%= error_info%> 
+        <%= info%> 
         </div>
       <%}%>
     <div class="control-group">
@@ -28,7 +28,11 @@
           <label class="control-label" for="input01">密码</label>
           <div class="controls">
             <input type="password" placeholder="" class="input-xlarge" name="password">
-            <p class="help-block"></p>
+          </div>
+          <!-- Text input-->
+          <label class="control-label" for="input01">确认密码</label>
+          <div class="controls">
+            <input type="password" placeholder="" class="input-xlarge" name="password2">
           </div>
         </div>
 

@@ -28,16 +28,21 @@ exports.lines = {
       let content = {
         advices : response,
         title : "全部线路",
+        power: this.session.power,
       }
       this.body = yield render('show_all_lines', content)
     } else {
-      this.redirect('/login')
+      let content = {
+          title: '登录系统',
+          error_info: 'no',
+       }
+       this.body = yield render('/login', content)
     }
   },
 
   //按主键查询
   findByPK: function *(){
-   if (this.session.authenticated) {
+   if (this.session.authenticated && this.session.power == 0) {
      //update the line
         if(this.method == 'POST') {
          let values = yield parse(this, {limit: '1kb'} )
@@ -82,7 +87,11 @@ exports.lines = {
           }
         } 
     } else {
-       this.redirect('/login')
+       let content = {
+          title: '登录系统',
+          error_info: 'no',
+       }
+       this.body = yield render('/login', content)
     }
 },
 
@@ -115,7 +124,11 @@ exports.lines = {
           this.body  = yield render('addLine', content)
         }
     } else {
-      this.redirect('/login')
+      let content = {
+          title: '登录系统',
+          error_info: 'no',
+       }
+       this.body = yield render('/login', content)
     }
   },
 
@@ -136,7 +149,11 @@ exports.lines = {
         }
     }
   } else {
-    this.redirect('/login')
+    let content = {
+          title: '登录系统',
+          error_info: 'no',
+       }
+       this.body = yield render('/login', content)
   }
   },
 
@@ -183,6 +200,7 @@ exports.lines = {
          response = add_line(rows[0][0], response)
        }
      }
+
       let content = {
         advices : response,
         need : body.need,
