@@ -175,6 +175,14 @@ exports.lines = {
           } 
         break
      }
+
+     //more than 4 peoples, we propose that they can book a car
+     if(body.num_person > 1) {
+       var rows = yield GLOBAL.db.query('select * from line_euro where line_id=23')
+       if(rows[0].length !== 0) { 
+         response = add_line(rows[0][0], response)
+       }
+     }
       let content = {
         advices : response,
         need : body.need,

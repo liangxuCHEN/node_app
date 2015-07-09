@@ -1,5 +1,8 @@
 'use strict'
 
+var txt1 = '客人信息(甲方)\n负责人姓名: \n  王淼 WANG MIAO 护照号:G39402641\n  殷璐  YIN   LU    护照号:G38047829\n  姚璐  YAO   LU    护照号:G29687902\n  谢雨霏 XIE YUFEI 护照号:E45737022\n联系方式:\n  王淼13910974939,殷璐13801082548'
+var txt2 = 'AVIGNON GRAND HOTEL 34,BD SAINT-ROCH,84000 FTANCE'
+
 var parse = require('co-body')
 //require dependencies
 var PDFDocument = require('pdfkit')
@@ -18,25 +21,35 @@ exports.contact = {
 
     doc.pipe(fs.createWriteStream('contactPDF/output-2.pdf'))
     // draw some text
-    doc.fontSize(25)
-       .text('Here is some vector graphics...', 100, 80)
+    //doc.font('Times-Roman')
+    doc.font('myTTF.ttf', 20)
+       .text('法国环欧旅游 接待合同', {align : 'center',})
+
+    doc.moveDown()
+          .fontSize(13)
+          .text('合同编号：0707201501', 300) 
+
+    doc.moveDown()
+          .fontSize(10)
+          .text ('根据国家有关旅游事业管理的规定，甲乙双方经协商一致，签订本合同，共同信守执行。 ' , 80)
+
+    doc.moveDown()
+       .moveDown()
+       .fontSize(13)
+       .text(txt1, {
+         align: 'left',
+         indent: 30,
+       })
+
+    doc.moveDown()
+       //.font('Times-Roman')
+       .text(txt2, {
+         align: 'left',
+         indent: 30,
+       })
+
        
-    // some vector graphics
-    doc.save()
-       .moveTo(100, 100)
-       .lineTo(100, 250)
-       .lineTo(200, 250)
-       .fill("#FF3300")
-       
-    doc.circle(280, 200, 50)
-       .fill("#6600FF")
-    // an SVG path
-    doc.scale(0.6)
-       .translate(470, 130)
-       .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
-       .fill('red', 'even-odd')
-       .restore()
-     
+   
     // end and display the document in the iframe to the right
     doc.end()
 

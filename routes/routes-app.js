@@ -26,7 +26,6 @@ router
   .get('/comments', service_comment.comments.findAll)
   .get('/notCheckComments', service_comment.comments.findAllNotCheck)
   .get('/admin', app_handler.admin_page)
-  .get('/pdf', contact_service.contact.generatorPDF)
   .get('/allContacts', contact_service.contact.readAllFile)
   .get('/contactPDF/:file_name', contact_service.contact.downFile)
 global.app.use(router.routes())
