@@ -8,6 +8,7 @@ var service_comment = require('../models/client_comment.js')
 var authService = require('../models/auth.js')  
 var app_handler = require('../handlers-app.js')
 var contact_service = require('../models/contact.js')
+var service_source = require('../models/source.js')
 
 //===========router setting==============
 router
@@ -30,4 +31,5 @@ router
   .get('/admin', app_handler.admin_page)
   .get('/allContacts', contact_service.contact.readAllFile)
   .get('/contactPDF/:file_name', contact_service.contact.downFile)
+  .get('/source', service_source.client_source.showSources)
 global.app.use(router.routes())

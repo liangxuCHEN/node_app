@@ -1,0 +1,29 @@
+<% include book_header.ejs %>
+<div class="container">
+ <% if (europely_source.num_source > 0) { %>
+   <div class="jumbotron">
+   <div class="page-header">
+      Europely:
+   </div>
+   <% i = 0 %>
+   <% europely_source.source_name.forEach(function(name) { %>
+       <%=name%> | <%=europely_source.count[i]%> <br />
+        <% i = i+1 %>
+   <%})%>  
+  </div>
+ <%}%>
+
+  <% if (ipiaoling_source.num_source > 0) { %>
+   <div class="jumbotron">
+   <div class="page-header">
+      Ipiaoling:
+   </div>
+   <% i = 0 %>
+   <% ipiaoling_source.source_name.forEach(function(name) { %>
+       <%=name%> | <%=ipiaoling_source.count[i]%> <br />
+        <% i = i+1 %>
+   <%})%>  
+   </div>
+ <%}%>
+</div>
+<% include book_footer.ejs %>
