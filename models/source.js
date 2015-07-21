@@ -39,8 +39,8 @@ exports.client_source = {
   showSources: function *() {
     if (this.session.authenticated ) {
         //watch params
-        let param = url.parse(this.url, true).query
-         console.log(param)
+        let params = url.parse(this.url, true).query
+         console.log(params)
          let rows = yield GLOBAL.db.query('Select * from source')
          if(rows[0].length !== 0) {
             var europely = {
@@ -61,26 +61,35 @@ exports.client_source = {
           }
 
           //edit the response of europely
-          let res = stats_source(europely)
+          let res = stats_source(europely, params)
           europely['web'] = _.keys(res)
           europely['num_source'] = europely['web'].length
           europely['count'] =  _.values(res)
           europely['created_at'] = NaN
 
           //edit the response of ipiaoling
-          res = stats_source(ipiaoling)
+          res = stats_source(ipiaoling, params)
           ipiaoling['web'] = _.keys(res)
           ipiaoling['num_source'] = ipiaoling['web'].length
           ipiaoling['count'] =  _.values(res)
           ipiaoling['created_at'] = NaN
           //console.log(response)
-          let content = {
-            title : "Source",
-            ipiaoling_source : ipiaoling,
-            europely_source: europely,
-          }
+          
           console.log(content)
-          this.body = yield render('show_source', content)
+          if (_.isEmpty(params)) {
+            let content = {
+              title : "Source",
+              ipiaoling_source : ipiaoling,
+              europely_source: europely,
+            }
+            this.body = yield render('show_source', content)
+          } else {
+            let content = {
+              ipiaoling_source : ipiaoling,
+              europely_source: europely,
+            }
+            this.body = content
+          }          
         } else {
           let content = {
               title: '登录系统',
@@ -97,14 +106,27 @@ function add_source(source, response) {
   return response
 }
 
-function stats_source(source) {
+//if url without params ,month=-1 (0-11 are available), year = 0  
+function stats_source(source, params) {
   let  totle_count = {}
+  let month = _.pick(params, 'month')
+  let year = _.pick(params, 'year')
+  let i = 0
+  console.log('------------month-------------')
+  console.log(month) 
   source.source_name.forEach(function(name) { 
-     if (_.has(totle_count ,name)) { 
-          totle_count[name] += 1
-        } else {
-          totle_count[name] = 1
+    //if have month or year , we need to consider
+    console.log('------------source-------------')
+    console.log(month['month']) 
+    console.log(source.created_at[i].getUTCMonth()) 
+     if (((_.isEmpty(month)) || (month['month'] == source.created_at[i].getUTCMonth())) && (( _.isEmpty(year)) || (year['year'] == source.created_at[i].getUTCFullYear()))) {
+         if (_.has(totle_count ,name)) { 
+              totle_count[name] += 1
+            } else {
+              totle_count[name] = 1
+            }
         }
+    i = i+1
     })
   console.log(totle_count)
   return totle_count
