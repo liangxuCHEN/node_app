@@ -8,7 +8,7 @@ $ ./configuer
 $ make 
 $ sudo make install 
 $ node -v
-$ npm install koa co-views co-body ejs koa-router co mysql-co koa-session
+$ npm install koa co-views co-body ejs koa-router co mysql-co koa-session underscore
 ```
 
 ## service nginx
