@@ -5,14 +5,19 @@ var _ = require('underscore')
 
 exports.client_source = {
 
-  addSource: function *(){
+  addSource: function *() {
     if (this.session.authenticated ) {
-      if(this.request.method === 'POST') {
-        let body = yield parse(this)
-
-        try {
+       let params = url.parse(this.url, true).query
+       //console.log(params)
+       let values = {
+          'web' : params.web,
+          'source_name' : params.source_name,
+          'created_at' : new Date().toISOString()
+       }
+       //console.log(values)
+       try {
           let rows = yield GLOBAL.db.query('Insert Into source Set ?', values)
-          this.redirect('/source')
+          this.body = 'OK'
         } catch (e) {
                switch (e.code) {
                    case 'ER_BAD_NULL_ERROR':
@@ -25,7 +30,6 @@ exports.client_source = {
                        return this.throw (e.message, 500); // Internal Server Error
                }
            }
-      }
     } else {
         let content = {
            title: '登录系统',
@@ -35,12 +39,11 @@ exports.client_source = {
     }
   },
 
-
   showSources: function *() {
     if (this.session.authenticated ) {
         //watch params
         let params = url.parse(this.url, true).query
-         console.log(params)
+      //   console.log(params)
          let rows = yield GLOBAL.db.query('Select * from source')
          if(rows[0].length !== 0) {
             var europely = {
@@ -65,6 +68,8 @@ exports.client_source = {
           europely['web'] = _.keys(res)
           europely['num_source'] = europely['web'].length
           europely['count'] =  _.values(res)
+          //calunate the total count
+          europely['total'] = _.reduce(europely['count'], function(memo, num) { return memo + num }, 0)
           europely['created_at'] = NaN
 
           //edit the response of ipiaoling
@@ -72,10 +77,11 @@ exports.client_source = {
           ipiaoling['web'] = _.keys(res)
           ipiaoling['num_source'] = ipiaoling['web'].length
           ipiaoling['count'] =  _.values(res)
+          //calunate the total count
+          ipiaoling['total'] = _.reduce(ipiaoling['count'], function(memo, num){ return memo + num }, 0)
           ipiaoling['created_at'] = NaN
           //console.log(response)
           
-          console.log(content)
           if (_.isEmpty(params)) {
             let content = {
               title : "Source",
@@ -98,6 +104,7 @@ exports.client_source = {
            this.body = yield render('/login', content)
         }
     },
+
  }
 
 function add_source(source, response) {
@@ -112,13 +119,8 @@ function stats_source(source, params) {
   let month = _.pick(params, 'month')
   let year = _.pick(params, 'year')
   let i = 0
-  console.log('------------month-------------')
-  console.log(month) 
   source.source_name.forEach(function(name) { 
     //if have month or year , we need to consider
-    console.log('------------source-------------')
-    console.log(month['month']) 
-    console.log(source.created_at[i].getUTCMonth()) 
      if (((_.isEmpty(month)) || (month['month'] == source.created_at[i].getUTCMonth())) && (( _.isEmpty(year)) || (year['year'] == source.created_at[i].getUTCFullYear()))) {
          if (_.has(totle_count ,name)) { 
               totle_count[name] += 1
@@ -128,6 +130,5 @@ function stats_source(source, params) {
         }
     i = i+1
     })
-  console.log(totle_count)
   return totle_count
 }

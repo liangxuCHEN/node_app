@@ -32,4 +32,5 @@ router
   .get('/allContacts', contact_service.contact.readAllFile)
   .get('/contactPDF/:file_name', contact_service.contact.downFile)
   .get('/source', service_source.client_source.showSources)
+  .get('/addSource', service_source.client_source.addSource)
 global.app.use(router.routes())

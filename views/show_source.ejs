@@ -47,12 +47,24 @@
    <ul>
   <% i = 0 %>
      <% europely_source.web.forEach(function(name) { %>
-      <li> <%=name%> | <%=europely_source.count[i]%> </li>
+      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','europely')"%>>+</button>  <%=name%> | <%=europely_source.count[i]%>   占<%= (europely_source.count[i] / europely_source['total'] * 100).toFixed(1) %>% </li>
         <% i = i+1 %>
      <%})%>  
     </ul>
+
    </div>
- <%}%>  
+ <%}%> 
+ <hr>
+  <div class="form-inline">
+	   <div class="form-group">
+	          <!-- Select Basic -->
+	          <label class="form-label">新来源</label>
+		<input type="text" placeholder="客户从哪里知道我们" class="input-xlarge" id="e_source_name"> 
+	  </div>
+	    <div class="form-group">
+                       <button class="btn btn-success" onclick="addSource('new','europely')">添加</button>
+	   </div>
+      </div> 
  </div>
 
   <% if (ipiaoling_source.num_source > 0) { %>
@@ -64,39 +76,81 @@
    <ul>
   <% i = 0 %>
      <% ipiaoling_source.web.forEach(function(name) { %>
-      <li> <%=name%> | <%=ipiaoling_source.count[i]%> </li>
+      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','ipiaoling')"%>>+</button> <%=name%> | <%=ipiaoling_source.count[i]%> 占<%= (ipiaoling_source.count[i] / ipiaoling_source['total'] * 100).toFixed(1) %>%</li>
         <% i = i+1 %>
      <%})%>  
     </ul>
    </div>
+     <hr>
+     <div class="form-inline">
+   	   <div class="form-group">
+   	          <!-- Select Basic -->
+   	          <label class="form-label">新来源</label>
+   		<input type="text" placeholder="客户从哪里知道我们" class="input-xlarge" id="i_source_name"> 
+   	  </div>
+   	    <div class="form-group">
+                          <button class="btn btn-success" onclick="addSource('new','ipiaoling')">添加</button>
+   	   </div>
+         </div> 
    </div>
  <%}%>
+  
 </div>
 <script type="text/javascript">
+//run the filter, show the resulte depende on the time
    function runFilter () {
+       //get the year and month value from selecter
        var year = document.getElementById('year').value
        var month =  document.getElementById('month').value
+       //remove the content
        $("#show_euro ul li").remove()
        $("#show_ipiaoling ul li").remove()
-       console.log(year)
-       console.log(month)
-       $.get("/source?month="+month+"&year="+year,function(data,status) {
-             var e_web = data.europely_source.web
-             var e_count = data.europely_source.count
-             var i = 0
-             e_web.forEach(function(name) {
-                 $li_1 = $("<li>" +name + "|" + e_count[i] + "</li>")
-                 $("#show_euro ul").append($li_1)
-              }) 
-             var i_web = data.ipiaoling_source.web
-             var i_count = data.ipiaoling_source.count
-             var i = 0
-             i_web.forEach(function(name) {
-                 $li_1 = $("<li>" +name + "|" + i_count[i] + "</li>")
-                 $("#show_ipiaoling ul").append($li_1)
-              }) 
-        })
+       //get the new data
+       //console.log(month)
+       if (month >= 0 ) {
+	$.get("/source?month="+month+"&year="+year,function(data,status) {showData(data)})
+        } else {
+        	$.get("/source?year="+year,function(data,status) {showData(data)})
+        }
+   }
 
+   function addSource(source_name,web) {
+      if (source_name == 'new') {
+      	if (web == 'europely') {
+      		source_name = document.getElementById('e_source_name').value
+      	} else {
+      		source_name = document.getElementById('i_source_name').value
+      	}
+      }
+      $.get("/addSource?web="+web+"&source_name="+source_name, function(data,status) {
+      	
+      	if (status == 'success') {
+      	  $("#show_euro ul li").remove()
+                $("#show_ipiaoling ul li").remove()
+      	  $.get("/source?p=1",function(data,status) {showData(data)})
+      	}
+       })
+    }
+
+   function showData (data) {
+   	var e_web = data.europely_source.web
+   	var e_count = data.europely_source.count
+   	var e_total = data.europely_source.total
+   	var i = 0
+   	e_web.forEach(function(name) {
+   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','europely')>+</button> " + name + " | " + e_count[i] + "占" + (e_count[i] / e_total * 100).toFixed(1) +"% </li>")
+   	              $("#show_euro ul").append($li_1)
+   		i = i+1
+   	}) 
+   	var i_web = data.ipiaoling_source.web
+   	var i_count = data.ipiaoling_source.count
+   	var i_total = data.ipiaoling_source.total
+   	var i = 0
+   	i_web.forEach(function(name) {
+   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','ipiaoling')>+</button> " +name + " | " + i_count[i] + "占" + (i_count[i] / i_total * 100).toFixed(1) +"% </li>")
+   		$("#show_ipiaoling ul").append($li_1)
+   		i = i+1
+   	}) 
    }
 </script>
 <% include book_footer.ejs %>
