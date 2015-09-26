@@ -1,0 +1,96 @@
+<% include book_header.ejs %>
+<div class="container">
+  
+ 
+  <form class="form-horizontal" action="/visitCave" method="POST">
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">酒庄预约</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01" >姓名：</label>
+          <div class="controls">
+            <input type="text" placeholder="" class="input-xlarge" name='clientName' required="true">
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">联系电话：</label>
+          <div class="controls">
+            <input type="text" placeholder="" class="input-xlarge" name='phone' required="true">
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">参观日期</label>
+          <div class="controls">
+            <input type="text" placeholder="2015/05/23" class="input-xlarge" name='visitDate'>
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">参观人数</label>
+          <div class="controls">
+            <input type="text" placeholder="成人 2 个，儿童 0 个" class="input-xlarge" name='member'>
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Select Multiple -->
+          <label class="control-label">参观酒庄</label>
+          <div class="controls">
+            <select class="input-xlarge" multiple="multiple" name='caveName'>
+      <option>Chateau Lafite Roths child拉斐庄</option>
+      <option>Chateau Latour拉图庄</option>
+      <option>Chateau Haut-Brion奥比昂庄</option>
+      <option>Chateau Margaux玛歌庄</option>
+      <option>Chateau Mouton Rothschild木桐庄</option>
+      <option>Chateau Ch Blanc白马庄</option>
+      <option>Chateau Ausone奥松庄</option>
+      <option>Petrus柏翠庄</option>
+      <option>波尔多一级酒庄</option>
+      <option>波尔多列级酒庄</option>
+      <option>勃艮第葡萄园</option></select>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Textarea -->
+          <label class="control-label">留言</label>
+          <div class="controls">
+            <div class="textarea">
+                  <textarea type="" class="" name='commentText'> </textarea>
+            </div>
+          </div>
+        </div>
+
+    <div class="control-group">
+          <label class="control-label"></label>
+
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-info">提交</button>
+          </div>
+        </div>
+
+    </fieldset>
+  </form>
+
+ 
+  
+</div>
+<% include book_footer.ejs %>

@@ -28,6 +28,16 @@ app.use(function* mysqlConnection(next) {
     this.db.release()
 })
 
+//========================email=======================
+var nodemailer = require('nodemailer')
+GLOBAL.smtpTransport = nodemailer.createTransport({
+  service: 'QQex',
+  auth: {
+    user: 'chenliangxu@ipiaoling.com',
+    pass: 'xxx',
+  }
+})
+
 //=============全局异常处理=============
 require('./errhandle.js')
 

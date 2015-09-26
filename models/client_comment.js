@@ -31,7 +31,11 @@ exports.comments = {
 
       this.body = yield render('show_all_comments', content)
     } else {
-      this.redirect('/login')
+      let content = {
+           title: '登录系统',
+           error_info: '没有足够权限',
+        }
+        this.body = yield render('/login', content)
     }
   },
 
@@ -54,7 +58,7 @@ exports.comments = {
 
          rows[0].forEach(function(comt) {
            if(comt.is_check == 0) {
-           	response.num_comments += 1
+            response.num_comments += 1
              response = add_comment(comt, response)
            }
          })
@@ -67,7 +71,11 @@ exports.comments = {
 
        this.body = yield render('show_all_comments', content)
      } else {
-       this.redirect('/login')
+       let content = {
+           title: '登录系统',
+           error_info: '没有足够权限',
+        }
+        this.body = yield render('/login', content)
      }
   },
 
@@ -76,8 +84,8 @@ exports.comments = {
     if(this.session.authenticated) {
       if(this.method == 'GET') {
         try {
-        	let rows = yield GLOBAL.db.query('UPDATE client_comment SET is_check = 1 where comment_id=?', this.params.id)
-        	this.redirect('/notCheckComments')
+          let rows = yield GLOBAL.db.query('UPDATE client_comment SET is_check = 1 where comment_id=?', this.params.id)
+          this.redirect('/notCheckComments')
         } catch (e) {
           switch (e.code) {
                 case 'ER_BAD_NULL_ERROR':
@@ -108,13 +116,18 @@ exports.comments = {
           is_success: true,
           title : '感谢留言'
         }
+        let text = '<p>有一个客户的留言 <br>'
+        text += '电话:  ' + values.phone + '<br>' 
+        text += '留言: ' + values.comment_text + '<br></p>'
+        text += '<p>更多详细内容  <a href="http://112.74.109.3:5000/notCheckComments">chick here</a></p>' 
+        sendMail('客户留言', text)
         this.body = yield render('addComment', content) 
       } catch (e) {
           let content = {
             is_success: false,
             title : '感谢留言'
           }
-          this.body = yield render('addComment', content) 
+          this.body = yield render('addComment', content)
         }
     }
   },
@@ -129,4 +142,23 @@ function add_comment(comment, response) {
   response.comment_text.push(comment.comment_text)
   response.created_at.push(comment.created_at)
   return response
+}
+
+function sendMail(subject, html) {
+  var mailOptions = {
+    from : 'chenliangxu@ipiaoling.com',
+    to: ['lchen@europely.com', '1372482437@qq.com'],
+    //to:  ['lchen@europely.com'],
+    subject: subject,
+    html: html
+  };
+
+  GLOBAL.smtpTransport.sendMail(mailOptions, function(error,response) {
+     if (error) {
+        console.log(error)
+     } else {
+        console.log('message has sent')
+     }
+     GLOBAL.smtpTransport.close()
+  });
 }
