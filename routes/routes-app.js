@@ -8,9 +8,6 @@ var service_comment = require('../models/client_comment.js')
 var authService = require('../models/auth.js')  
 var app_handler = require('../handlers-app.js')
 var reservation_service = require('../models/reservation.js')
-//var contact_service = require('../models/contact.js')
-//.get('/allContacts', contact_service.contact.readAllFile)
-//.get('/contactPDF/:file_name', contact_service.contact.downFile)
 var service_source = require('../models/source.js')
 
 //===========router setting==============
