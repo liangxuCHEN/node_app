@@ -9,6 +9,7 @@ var authService = require('../models/auth.js')
 var app_handler = require('../handlers-app.js')
 var reservation_service = require('../models/reservation.js')
 var service_source = require('../models/source.js')
+var email_service = require('../models/promotion.js')
 
 //===========router setting==============
 router
@@ -33,4 +34,6 @@ router
   .get('/addSource', service_source.client_source.addSource)
   .get('/visitCave', reservation_service.reservation.VisitCave)
   .post('/visitCave', reservation_service.reservation.VisitCave)
+  .get('/sendPormotionEmail', email_service.email.sendMails)
+  .post('/sendPormotionEmail', email_service.email.sendMails)
 global.app.use(router.routes())

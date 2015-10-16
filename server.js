@@ -34,7 +34,7 @@ GLOBAL.smtpTransport = nodemailer.createTransport({
   service: 'QQex',
   auth: {
     user: 'chenliangxu@ipiaoling.com',
-    pass: 'xxx',
+    pass: 'xxxx',
   }
 })
 
