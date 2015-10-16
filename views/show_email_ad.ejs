@@ -1,0 +1,25 @@
+<% include header.ejs %>
+  <div class="container">
+    <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                          <th>编号</th><th>country</th><th>URL</th><th>city</th><th>icon</th><th>line</th><th>model</th><th>price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <% i = 0 %>
+                       <% email_ads.ad_id.forEach(function(id) { %>
+                        <%if ( i % 2 ==0 ) { %>
+                          <tr class="success">
+                        <%} else { %>  
+	            <tr class="info">
+	          <% }%>	
+		<th><%=id%></th><th><%=email_ads.countrys[i]%></th><th><%=email_ads.urls[i]%></th><th><%=email_ads.citys[i]%></th>
+		<th><%=email_ads.icons[i]%></th><th><%=email_ads.lines[i]%></th><th><%=email_ads.models[i]%></th><th><%=email_ads.prices[i]%></th>
+                        </tr>
+                        <% i = i+1 %>
+                        <%})%>
+                    </tbody>
+                </table>
+   </div>
+<% include footer.ejs %>
