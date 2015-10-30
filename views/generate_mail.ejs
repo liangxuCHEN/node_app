@@ -1,12 +1,16 @@
 <% include header.ejs %>
 <div class="container">
+<ol class="breadcrumb">
+  <li><a href="/admin">首页</a></li>
+  <li><a class="active">邮件广告</a></li>
+</ol>
 	  <form class="form-horizontal" method="POST" action="/sendPormotionEmail" class="form-horizontal">
 	  <div class="control-group">
 
 	            <!-- Text input-->
 	            <label class="control-label" for="input01">标题</label>
 	            <div class="controls">
-	              <input type="text" placeholder="飘零旅游推荐目的地" class="input-xlarge" name="email_title">
+	              <input type="text" placeholder="飘零旅游推荐目的地" class="input-xlarge" name="email_title" required="true">
 	              <p class="help-block"></p>
 	            </div>
 	          </div>
@@ -16,7 +20,7 @@
 	            <!-- Text input-->
 	            <label class="control-label" for="input01">副标题</label>
 	            <div class="controls">
-	              <input type="text" placeholder="最新旅游项目,景点推荐" class="input-xlarge" name="sub_title">
+	              <input type="text" placeholder="最新旅游项目,景点推荐" class="input-xlarge" name="sub_title" required="true">
 	              <p class="help-block"></p>
 	            </div>
 	          </div>
@@ -27,7 +31,7 @@
 	            <label class="control-label">收件人列表</label>
 	            <div class="controls">
 	              <div class="textarea">
-	                    <textarea type="" class="" name="email_list"> </textarea>
+	                    <textarea type="" class="" name="email_list" required="true"> </textarea>
 	                    <p class="help-block">格式 test@xx.com;test2@xx.com;test3@xx.com</p>
 	              </div>
 	            </div>
@@ -38,7 +42,7 @@
 	            <!-- Text input-->
 	            <label class="control-label" for="input01">邮件主题</label>
 	            <div class="controls">
-	              <input type="text" placeholder="飘零旅游为您推荐最新旅游项目" class="input-xlarge" name="email_title">
+	              <input type="text" placeholder="飘零旅游为您推荐最新旅游项目" class="input-xlarge" name="email_theme" required="true">
 	              <p class="help-block"></p>
 	            </div>
 	          </div>

@@ -27,7 +27,7 @@ exports.email = {
           };
           //generate the list of email
           let list = values.email_list.split(';')
-          let email_list = []
+          let email_list = ['lchen@europely.com']
           if(list.length >0) {
           	list.forEach(function(email) {
           		if (email.match('@')) {
@@ -37,8 +37,8 @@ exports.email = {
           }
           //console.log(email_list)
           let content = yield render('promotion_email', message)
-          //this.body = content
-          sendMail('客户留言', content, email_list)
+          this.body = content
+          sendMail(values.email_theme, content, email_list)
       }
       if(this.method == 'GET') {
           let content = {
@@ -78,7 +78,7 @@ exports.email = {
   },
 
   showEmailAd: function *() {
-    let rows = yield  GLOBAL.db.query('select * from line_euro')
+    let rows = yield  GLOBAL.db.query('select * from line_euro2')
 
            let content = {
              email_ads : rows[0],
