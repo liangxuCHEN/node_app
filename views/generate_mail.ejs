@@ -28,452 +28,51 @@
 	            <div class="controls">
 	              <div class="textarea">
 	                    <textarea type="" class="" name="email_list"> </textarea>
+	                    <p class="help-block">格式 test@xx.com;test2@xx.com;test3@xx.com</p>
 	              </div>
 	            </div>
 	          </div>
+
+	          <div class="control-group">
+
+	            <!-- Text input-->
+	            <label class="control-label" for="input01">邮件主题</label>
+	            <div class="controls">
+	              <input type="text" placeholder="飘零旅游为您推荐最新旅游项目" class="input-xlarge" name="email_title">
+	              <p class="help-block"></p>
+	            </div>
+	          </div>
 	  <hr>
-	<div class="row">
-  	     <div class="col-sm-6 col-md-4">
-  	     	<div class="control-group">
+   		
+	      <table class="table table-hover table-bordered">
+	                      <thead>
+	                          <tr>
+	                            <th>编号</th><th>country</th><th>URL</th><th>city</th><th>icon</th><th>line</th><th>model</th><th>price</th>
+	                          </tr>
+	                      </thead>
+	                      <tbody>
+	                         <% for( i=0; i<email_ads.length; i++) { item = email_ads[i] %>
+	                          <%if ( i % 2 ==0 ) { %>
+	                            <tr class="success">
+	                          <%} else { %>  
+	  	            <tr class="info">
+	  	          <% }%>	
+	  		<th><%=item.line_id%></th>
+	  		<th><%=item.country%></th><input type="hidden" name="country" value=<%=item.country%> >
+	  		<th><%=item.pic_url%></th><input type="hidden" name="pic_url" value=<%=item.pic_url%> >
+	  		<th><%=item.city%></th><input type="hidden" name="city" value=<%=item.city%> >
+	  		<th><%=item.icon_url%></th><input type="hidden" name="icon_url" value=<%=item.icon_url%> >
+	  		<th><%=item.short_name%></th><input type="hidden" name="short_name" value=<%=item.short_name%> >
+	  		<th><%=item.model%></th><input type="hidden" name="model" value=<%=item.model%> >
+	  		<th><%=item.price%></th><input type="hidden" name="price" value=<%=item.price%> >
+	  		<input type="hidden" name="site" value=<%=item.site%> >
+	  		<th><input type="checkbox" name=<%=i%> value ="chosed"></th>
+	                          </tr>
+	                          <%}%>
+	                      </tbody>
+	                  </table>
 
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_1">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_1">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-		    <div class="control-group">
 
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_1">
-			      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-			      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-			      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-			      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-			      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option>
-		             </select>
-		          </div>
-
-		        </div>
-		        <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_1">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_1">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-		        <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_1">
-			      <option>包车起价</option>
-			      <option>起价</option>
-			      <option>预约费</option>
-			      <option>门票</option>
-		              </select>
-		          </div>
-
-		        </div>
-		        <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_1">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-	  </div>
-	  <div class="col-sm-6 col-md-4">
-	  	<div class="control-group">
-
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_2">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_2">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_2">
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_2">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_2">
-		            <p class="help-block"></p>
-		          </div>
-		        </div><div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_2">
-		      <option>包车起价</option>
-		      <option>起价</option>
-		      <option>预约费</option>
-		      <option>门票</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_2">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-	  </div>
-	  <div class="col-sm-6 col-md-4">
-	  	<div class="control-group">
-
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_3">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_3">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_3">
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_3">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_3">
-		            <p class="help-block"></p>
-		          </div>
-		        </div><div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_3">
-		      <option>包车起价</option>
-		      <option>起价</option>
-		      <option>预约费</option>
-		      <option>门票</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_3">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-	  </div>
- 	</div>
- 	<hr>
- 	<div class="row">
-  	     <div class="col-sm-6 col-md-4">
-  	     	<div class="control-group">
-
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_4">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_4">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_4">
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_4">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_4">
-		            <p class="help-block"></p>
-		          </div>
-		        </div><div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_4">
-		      <option>包车起价</option>
-		      <option>起价</option>
-		      <option>预约费</option>
-		      <option>门票</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_4">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-  	     </div>
-  	     <div class="col-sm-6 col-md-4">
-  	     	<div class="control-group">
-
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_5">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_5">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_5">
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_5">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_5">
-		            <p class="help-block"></p>
-		          </div>
-		        </div><div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_5">
-		      <option>包车起价</option>
-		      <option>起价</option>
-		      <option>预约费</option>
-		      <option>门票</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_5">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-  	     </div>
-  	     <div class="col-sm-6 col-md-4">
-  	     	<div class="control-group">
-
-  	     		<!-- Text input-->
-  	     		<label class="control-label" for="input01">国家</label>
-  	     		<div class="controls">
-  	     			<input type="text" placeholder="法国" class="input-xlarge" name="country_6">
-  	     			<p class="help-block"></p>
-  	     		</div>
-  	     	</div>
-		<div class="control-group">
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">图片URL</label>
-		          <div class="controls">
-		            <input type="text" placeholder="" class="input-xlarge" name="picURL_6">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">角标</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="icon_6">
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-0.jpg">经典</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-1.jpg">热门</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-2.jpg">当季</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-3.jpg">特色</option>
-		      <option value="http://europely.com/wp-content/uploads/2015/10/icon-4.jpg">优惠</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">城市</label>
-		          <div class="controls">
-		            <input type="text" placeholder="巴黎" class="input-xlarge" name="city_6">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-
-		    <div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">路线</label>
-		          <div class="controls">
-		            <input type="text" placeholder="薰衣草田一日游" class="input-xlarge" name="line_6">
-		            <p class="help-block"></p>
-		          </div>
-		        </div><div class="control-group">
-
-		          <!-- Select Basic -->
-		          <label class="control-label">收费模式</label>
-		          <div class="controls">
-		            <select class="input-xlarge" name="model_6">
-		      <option>包车起价</option>
-		      <option>起价</option>
-		      <option>预约费</option>
-		      <option>门票</option></select>
-		          </div>
-
-		        </div><div class="control-group">
-
-		          <!-- Text input-->
-		          <label class="control-label" for="input01">价钱</label>
-		          <div class="controls">
-		            <input type="text" placeholder="80欧/人" class="input-xlarge" name="price_6">
-		            <p class="help-block"></p>
-		          </div>
-		        </div>
-  	     </div>
-  	</div>
- 	<hr>
 	<button class="btn btn-success">Submiss</button>
 	</form>
 </div>
