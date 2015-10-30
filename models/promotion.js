@@ -78,31 +78,13 @@ exports.email = {
   },
 
   showEmailAd: function *() {
-    let rows = yield  GLOBAL.db.query('select * from email_ads')
-
-          if(rows[0].length !== 0){
-            var response = {
-                  num_ads : rows[0].length,
-                  ad_id: [],
-                  countrys : [],
-                  urls : [],
-                  icons : [],
-                  citys : [],
-                  lines : [],
-                  models : [],
-                  prices : [],
-              }
-              
-            rows[0].forEach(function(ad) {
-              response = add_ad(ad, response)
-            })
-          }
+    let rows = yield  GLOBAL.db.query('select * from line_euro')
 
            let content = {
-             email_ads : response,
+             email_ads : rows[0],
              title : "show email ads",
            }
-          this.body = yield render('show_email_ad', content)
+           this.body = yield render('show_email_ad', content)
   },
 
 }
@@ -124,16 +106,4 @@ function sendMail(subject, html, email_list) {
      }
      GLOBAL.smtpTransport.close()
   });
-}
-
-function add_ad(ad, response) {
-   response.urls.push(ad.url)
-   response.ad_id.push(ad.ad_id)
-   response.countrys.push(ad.country)
-   response.icons.push(ad.icon)
-   response.lines.push(ad.line)
-   response.models.push(ad.model)
-   response.prices.push(ad.price)
-   response.citys.push(ad.city)
-  return response
 }

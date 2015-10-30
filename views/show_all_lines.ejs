@@ -5,25 +5,24 @@
   <li><a class="active">路线</a></li>
 </ol>
 <div class="page-header">
- <% if (advices.num_lines > 0) { %>
-  <h4> <%=advices.num_lines%>个参考行程</h4>
+<% len= advices.length %>
+ <% if (len > 0) { %>
+  <h4> <%=len%>个参考行程</h4>
 </div>
 <div class="jumbotron">
- <% i = 0 %>
 <ul class="list-group">
- <% advices.urls.forEach(function(url) { %>
-  <% i=i+1%>
+ <% for (var i=0; i<len; i++ ) { item = advices[i]%>
     <li class="list-group-item"><span class="badge">
-      <%= advices.price[i-1]%></span><span class="label label-danger">行程<%= i %></span>
-      <a href=<%= url%> target="_blank"><%= advices.name_line[i-1]%></a> 
-       <span class="label label-info"><%=advices.day[i-1]%>天</span>
-      <%if (advices.actived[i-1]) {%>
+      <%= item.price%></span><span class="label label-danger">行程<%= i+1 %></span>
+      <a href=<%= item.site%> target="_blank"><%= item.name_cn%></a> 
+       <span class="label label-info"><%=item.day%>天</span>
+      <%if (item.active) {%>
         <span class="label label-success">有用</span>
       <% } else {%>
         <span class="label label-warning">无用</span>
       <% }%>
-      <%if (power == 0) {%> <a href=<%= '/lines/' + advices.line_id[i-1]%>>编辑</a> </li> <% }%>
-  <% }) %>
+      <%if (power == 0) {%> <a href=<%= '/lines/' + item.line_id%>>编辑</a> </li> <% }%>
+  <% } %>
  </ul>
 </div>
  <%} %>

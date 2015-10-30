@@ -8,25 +8,9 @@ exports.lines = {
       //执行sql返回结果
       let rows = yield  GLOBAL.db.query('select * from line_euro')
 
-      if(rows[0].length !== 0){
-        var response = {
-              num_lines : rows[0].length,
-              line_id: [],
-              urls : [],
-              name_line : [],
-              price: [],
-              actived:[],
-              day:[],
-              destination:[],
-          }
-          
-        rows[0].forEach(function(line) {
-          response = add_line(line, response)
-        })
-      }
       //console.log(response)
       let content = {
-        advices : response,
+        advices : rows[0],
         title : "全部线路",
         power: this.session.power,
       }
@@ -74,13 +58,7 @@ exports.lines = {
             return this.throw(this.params.id + '数据未找到', 404);
           } else {
              let content = {
-               line_id: rows[0][0].line_id,
-               name_cn: rows[0][0].name_cn,
-               url_line: rows[0][0].site,
-               day: rows[0][0].day,
-               price: rows[0][0].price,
-               actived: rows[0][0].active,
-               destination: rows[0][0].destination,
+               item : rows[0][0],
                title : "线路编辑",
              }
              this.body = yield render('show_line', content)

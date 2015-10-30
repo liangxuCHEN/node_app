@@ -7,18 +7,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                     <% i = 0 %>
-                       <% email_ads.ad_id.forEach(function(id) { %>
+                       <% for( i=0; i<email_ads.length; i++) { item = email_ads[i] %>
                         <%if ( i % 2 ==0 ) { %>
                           <tr class="success">
                         <%} else { %>  
 	            <tr class="info">
 	          <% }%>	
-		<th><%=id%></th><th><%=email_ads.countrys[i]%></th><th><%=email_ads.urls[i]%></th><th><%=email_ads.citys[i]%></th>
-		<th><%=email_ads.icons[i]%></th><th><%=email_ads.lines[i]%></th><th><%=email_ads.models[i]%></th><th><%=email_ads.prices[i]%></th>
+		<th><%=item.line_id%></th><th><%=item.country%></th><th><%=item.pic_url%></th><th><%=item.city%></th>
+		<th><%=item.icon_url%></th><th><%=item.short_name%></th><th><%=item.model%></th><th><%=item.price%></th>
                         </tr>
-                        <% i = i+1 %>
-                        <%})%>
+                        <%}%>
                     </tbody>
                 </table>
    </div>
