@@ -32,6 +32,7 @@ router
   .get('/admin', app_handler.admin_page)
   .get('/source', service_source.client_source.showSources)
   .get('/addSource', service_source.client_source.addSource)
+  .get('/delSource', service_source.client_source.delSource)
   .get('/visitCave', reservation_service.reservation.VisitCave)
   .post('/visitCave', reservation_service.reservation.VisitCave)
   .get('/showEmailAd', email_service.email.showEmailAd)

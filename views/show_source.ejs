@@ -45,13 +45,13 @@
    <div class="jumbotron">
     
    <div class="page-header">
-      Europely:
-   </div>
+     <p  id="e_head">Europely:      一共  <%=europely_source['total']%> 次咨询 </p>
+  </div>
    <div id='show_euro'>
    <ul>
   <% i = 0 %>
      <% europely_source.web.forEach(function(name) { %>
-      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','europely')"%>>+</button>  <%=name%> | <%=europely_source.count[i]%>   占<%= (europely_source.count[i] / europely_source['total'] * 100).toFixed(1) %>% </li>
+      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','europely')"%>>+</button>  <%=name%> | <%=europely_source.count[i]%>   占 <%= (europely_source.count[i] / europely_source['total'] * 100).toFixed(1) %>%  <button class="btn btn-danger" onclick=<%="delSource('"+name+"','europely')"%>>减掉一个</button></li>
         <% i = i+1 %>
      <%})%>  
     </ul>
@@ -74,13 +74,13 @@
   <% if (ipiaoling_source.num_source > 0) { %>
    <div class="jumbotron">
    <div class="page-header">
-      Ipiaoling:
+      <p id="i_head">Ipiaoling:      一共  <%=ipiaoling_source['total']%> 次咨询 </p>
    </div>
    <div id='show_ipiaoling'>
    <ul>
   <% i = 0 %>
      <% ipiaoling_source.web.forEach(function(name) { %>
-      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','ipiaoling')"%>>+</button> <%=name%> | <%=ipiaoling_source.count[i]%> 占<%= (ipiaoling_source.count[i] / ipiaoling_source['total'] * 100).toFixed(1) %>%</li>
+      <li> <button class="btn btn-info" onclick=<%="addSource('"+name+"','ipiaoling')"%>>+</button> <%=name%> | <%=ipiaoling_source.count[i]%> 占<%= (ipiaoling_source.count[i] / ipiaoling_source['total'] * 100).toFixed(1) %>% <button class="btn btn-danger" onclick=<%="delSource('"+name+"','ipiaoling')"%>>减掉一个</button></li>
         <% i = i+1 %>
      <%})%>  
     </ul>
@@ -129,20 +129,34 @@
       $.get("/addSource?web="+web+"&source_name="+source_name, function(data,status) {
       	
       	if (status == 'success') {
-      	  $("#show_euro ul li").remove()
-                $("#show_ipiaoling ul li").remove()
-      	  $.get("/source?p=1",function(data,status) {showData(data)})
+        $("#show_euro ul li").remove()
+        $("#show_ipiaoling ul li").remove()
+        $.get("/source?p=1",function(data,status) {showData(data)})
       	}
        })
     }
+
+    function delSource(source_name,web) {
+       console.log("begin")
+       $.get("/delSource?web="+web+"&source_name="+source_name, function(data,status) {
+        
+        if (status == 'success') {
+         $("#show_euro ul li").remove()
+         $("#show_ipiaoling ul li").remove()
+         //p=1 that tell the body dont need to add the all the page, just the source content 
+         $.get("/source?p=1",function(data,status) {showData(data)})
+        }
+        })
+     }
 
    function showData (data) {
    	var e_web = data.europely_source.web
    	var e_count = data.europely_source.count
    	var e_total = data.europely_source.total
    	var i = 0
+      $("#e_head").text("Europely:      一共  "+ e_total +" 次咨询" )
    	e_web.forEach(function(name) {
-   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','europely')>+</button> " + name + " | " + e_count[i] + "占" + (e_count[i] / e_total * 100).toFixed(1) +"% </li>")
+   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','europely')>+</button> " + name + " | " + e_count[i] + "占" + (e_count[i] / e_total * 100).toFixed(1) +"% <button class='btn btn-danger' onclick=delSource('"+name+"','europely')>减掉一个</button></li>")
    	              $("#show_euro ul").append($li_1)
    		i = i+1
    	}) 
@@ -150,8 +164,9 @@
    	var i_count = data.ipiaoling_source.count
    	var i_total = data.ipiaoling_source.total
    	var i = 0
+    $("#i_head").text("Piaoling:      一共  "+ i_total +" 次咨询" )
    	i_web.forEach(function(name) {
-   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','ipiaoling')>+</button> " +name + " | " + i_count[i] + "占" + (i_count[i] / i_total * 100).toFixed(1) +"% </li>")
+   		$li_1 = $("<li> <button class='btn btn-info' onclick=addSource('"+name+"','ipiaoling')>+</button> " +name + " | " + i_count[i] + "占" + (i_count[i] / i_total * 100).toFixed(1) +"% <button class='btn btn-danger' onclick=delSource('"+name+"','ipiaoling')>减掉一个</button></li>")
    		$("#show_ipiaoling ul").append($li_1)
    		i = i+1
    	}) 

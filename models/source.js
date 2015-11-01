@@ -39,6 +39,37 @@ exports.client_source = {
     }
   },
 
+//deleted the source
+  delSource: function *() {
+    if (this.session.authenticated ) {
+       let params = url.parse(this.url, true).query
+       //console.log(params)
+       try {
+          //delete from source where web="ipiaoling" and source_name="qyer" order by created_at desc limit 1;
+          let rows = yield GLOBAL.db.query(
+            'DELETE FROM source WHERE web= ? and source_name=? ORDER BY created_at DESC LIMIT 1', [params.web, params.source_name])
+          this.body = 'OK'
+        } catch (e) {
+               switch (e.code) {
+                   case 'ER_BAD_NULL_ERROR':
+                   case 'ER_DUP_ENTRY':
+                   case 'ER_NO_REFERENCED_ROW_2':
+                   case 'ER_NO_DEFAULT_FOR_FIELD':
+                       // recognised errors for use default MySQL messages for now
+                       return this.throw (e.message, 403); // Forbidden
+                   default:
+                       return this.throw (e.message, 500); // Internal Server Error
+               }
+           }
+    } else {
+        let content = {
+           title: '登录系统',
+           error_info: '没有足够权限',
+        }
+        this.body = yield render('/login', content)
+    }
+  },
+
   showSources: function *() {
     if (this.session.authenticated ) {
         //watch params
