@@ -9,6 +9,7 @@ exports.email = {
           let message = {
               title : values.email_title,
               sub_title : values.sub_title,
+              logo : values.logo,
            }
           message.email_ads = []
           for (var i = values.country.length - 1; i >= 0; i--) {
@@ -78,8 +79,7 @@ exports.email = {
   },
 
   showEmailAd: function *() {
-    let rows = yield  GLOBAL.db.query('select * from line_euro2')
-
+    let rows = yield  GLOBAL.db.query('select * from line_euro')
            let content = {
              email_ads : rows[0],
              title : "show email ads",
