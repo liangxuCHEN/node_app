@@ -16,7 +16,7 @@ exports.reservation = {
       message.is_check = 0
       message.created_at = new Date().toDateString()
       message.phone = values.phone
-      message.email = '姓名:  ' + values.clientName
+      message.email = '姓名:  ' + values.clientName + '; 邮箱:  ' + values.email + '<br>' 
       message.comment_text = '参观日期:  ' + values.visitDate + '\n参观人数:  ' + values.member +'个\n参观酒庄:  ' + values.caveName
       message.comment_text += '\n儿童:  ' + values.has_child + '个\n留言: ' + values.commentText
       //console.log(values)
@@ -29,6 +29,7 @@ exports.reservation = {
         let text = '<p>有一个客户的预约 <br>'
         text += '姓名:  ' + values.clientName + '<br>' 
         text += '电话:  ' + values.phone + '<br>' 
+        text += '邮箱:  ' + values.email + '<br>' 
         text += '参观日期:  ' + values.visitDate + '<br>' 
         text += '参观酒庄:  ' + values.caveName + '<br>' 
         text += '参观人数:  ' + values.member + '<br>' 
