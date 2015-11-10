@@ -4,7 +4,7 @@ var parse = require('co-body')
 exports.email = {
   sendMails: function *() {
       if(this.method == 'POST') {
-          let values = yield parse(this, {limit: '5kb'} )
+          let values = yield parse(this)
           //console.log(values)
           let message = {
               title : values.email_title,
