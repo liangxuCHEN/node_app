@@ -12,20 +12,45 @@ exports.email = {
               logo : values.logo,
            }
           message.email_ads = []
-          for (var i = values.country.length - 1; i >= 0; i--) {
-	    if (values[i] == "chosed") {
-	          	message.email_ads.push({
-	          		country : values.country[i],
-	          		pic_url : values.pic_url[i],
-	          		icon_url : values.icon_url[i],
-	          		city : values.city[i],
-	          		short_name : values.short_name[i],
-	          		model : values.model[i],
-	          		price : values.price[i],
-	          		site: values.site[i],
-	          	})
-	    }
-          };
+
+          //if logo is europely, the url must be europely = site, 
+          if(values.logo == "europely") {
+            for (var i = values.country.length - 1; i >= 0; i--) {
+        	    if (values[i] == "chosed") {
+        	          	message.email_ads.push({
+        	          		country : values.country[i],
+        	          		pic_url : values.pic_url[i]+"-EEmailPhoto",
+        	          		icon_url : values.icon_url[i],
+        	          		city : values.city[i],
+        	          		short_name : values.short_name[i],
+        	          		model : values.model[i],
+        	          		price : values.price[i],
+                                    site: values.site[i],
+                                    //site_piao: values.site_piao[i],
+        	          	})
+
+      	             }
+              }
+          }
+          else{
+                  for (var i = values.country.length - 1; i >= 0; i--) {
+                    if (values[i] == "chosed") {
+                            message.email_ads.push({
+                              country : values.country[i],
+                              pic_url : values.pic_url[i]+"-PEmailPhoto",
+                              icon_url : values.icon_url[i],
+                              city : values.city[i],
+                              short_name : values.short_name[i],
+                              model : values.model[i],
+                              price : values.price[i],
+                              //site: values.site[i],
+                              site: values.site_piao[i],
+                            })
+
+                           }
+                    }
+          }
+
           //generate the list of email
           let list = values.email_list.split(';')
           let email_list = ['lchen@europely.com']
