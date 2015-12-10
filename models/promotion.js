@@ -10,6 +10,8 @@ exports.email = {
               title : values.email_title,
               sub_title : values.sub_title,
               logo : values.logo,
+              ad_pic_url: values.ad_pic_url,
+              ad_url:values.ad_url,
            }
           message.email_ads = []
 
