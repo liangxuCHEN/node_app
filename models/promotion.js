@@ -118,7 +118,7 @@ exports.email = {
 
 function sendMail(subject, html, email_list) {
   var mailOptions = {
-    from : 'chenliangxu@ipiaoling.com',
+    from : GLOBAL.config.email.auth.user,
     to: email_list,
     subject: subject,
     html: html

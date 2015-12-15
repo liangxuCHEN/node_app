@@ -146,7 +146,7 @@ function add_comment(comment, response) {
 
 function sendMail(subject, html) {
   var mailOptions = {
-    from : 'chenliangxu@ipiaoling.com',
+    from : GLOBAL.config.email.auth.user,
     to: ['lchen@europely.com', 'reservation@europely.com'],
     //to:  ['lchen@europely.com'],
     subject: subject,

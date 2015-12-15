@@ -30,13 +30,8 @@ app.use(function* mysqlConnection(next) {
 
 //========================email=======================
 var nodemailer = require('nodemailer')
-GLOBAL.smtpTransport = nodemailer.createTransport({
-  service: 'QQex',
-  auth: {
-    user: 'chenliangxu@ipiaoling.com',
-    pass: 'xxx',
-  }
-})
+GLOBAL.config = require('./config/email.json')
+GLOBAL.smtpTransport = nodemailer.createTransport(GLOBAL.config.email)
 
 //=============全局异常处理=============
 require('./errhandle.js')
