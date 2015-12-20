@@ -117,19 +117,19 @@ exports.email = {
 }
 
 function sendMail(subject, html, email_list) {
-  var mailOptions = {
-    from : GLOBAL.config.email.auth.user,
-    to: email_list,
-    subject: subject,
-    html: html
-  };
+  for (var i = email_list.length - 1; i >= 0; i--) {
+    var mailOptions = {
+      from : GLOBAL.config.email.auth.user,
+      to: [email_list[i]],
+      subject: subject,
+      html: html
+    };
 
-  GLOBAL.smtpTransport.sendMail(mailOptions, function(error,response) {
-     if (error) {
-        console.log(error)
-     } else {
-        console.log('message has sent')
-     }
-     GLOBAL.smtpTransport.close()
-  });
+    GLOBAL.smtpTransport.sendMail(mailOptions, function(error,response) {
+       if (error) {
+          console.log(error)
+       } 
+       GLOBAL.smtpTransport.close()
+    });
+  }
 }
