@@ -33,7 +33,7 @@ router
   .get('/source', service_source.client_source.showSources)
   .get('/addSource', service_source.client_source.addSource)
   .get('/delSource', service_source.client_source.delSource)
-  .get('/visitCave', reservation_service.reservation.VisitCave)
+  .get('/visitCave/:from_site', reservation_service.reservation.VisitCave)
   .post('/visitCave', reservation_service.reservation.VisitCave)
   .get('/showEmailAd', email_service.email.showEmailAd)
   .get('/sendPormotionEmail', email_service.email.sendMails)

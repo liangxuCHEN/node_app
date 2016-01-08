@@ -17,7 +17,7 @@ exports.reservation = {
       message.created_at = new Date().toDateString()
       message.phone = values.phone
       message.email = '姓名:  ' + values.clientName + '; 邮箱:  ' + values.email + '<br>' 
-      message.comment_text = '参观日期:  ' + values.visitDate + '\n参观人数:  ' + values.member +'个\n参观酒庄:  ' + values.caveName
+      message.comment_text = values.from_site + ' 参观日期:  ' + values.visitDate + '\n参观人数:  ' + values.member +'个\n参观酒庄:  ' + values.caveName
       message.comment_text += '\n儿童:  ' + values.has_child + '个\n留言: ' + values.commentText
       //console.log(values)
       try {
@@ -26,7 +26,7 @@ exports.reservation = {
           is_success: true,
           title : '感谢预约'
         }
-        let text = '<p>有一个客户的预约 <br>'
+        let text = "<p>来自 "+values.from_site+'网站的咨询, '+'有一个客户的预约 <br>' 
         text += '姓名:  ' + values.clientName + '<br>' 
         text += '电话:  ' + values.phone + '<br>' 
         text += '邮箱:  ' + values.email + '<br>' 
@@ -47,8 +47,10 @@ exports.reservation = {
     }
      if(this.method == 'GET') {
        let content = {
-          title : '预约参观酒庄'
+          title : '预约参观酒庄',
+          from_site: this.params.from_site,
         }
+        //console.log(content)
         this.body = yield render('visitCaveForm', content)
      }
   },
